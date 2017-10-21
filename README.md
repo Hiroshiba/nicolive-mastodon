@@ -13,10 +13,10 @@ HTML5コメントジェネレーター
 ニコニコ生放送
 ```
 
-### インストール方法
+### 実行方法
 
 #### windows
-.exeをダウンロードします。
+最新版の.exeをダウンロード＆実行します。[exeファイル配布場所](https://github.com/Hiroshiba/nicolive-mastodon/releases)
 
 #### その他のOS
 pythonコードをダウンロード＆実行します。
@@ -29,8 +29,8 @@ git clone git@github.com:Hiroshiba/nicolive-mastodon.git
 python run.py
 ```
 
-### 簡単な使い方
-config.jsonを編集して実行します。
+### 設定方法
+設定ファイル（config.json）を編集することで設定できます。
 
 ```json
 {
