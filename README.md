@@ -18,6 +18,8 @@ HTML5コメントジェネレーター
 #### windows
 最新版の.exeをダウンロード＆実行します。[exeファイル配布場所](https://github.com/Hiroshiba/nicolive-mastodon/releases)
 
+マストドンのアカウントとパスワードを入力すると使用可能になります。
+
 #### その他のOS
 pythonコードをダウンロード＆実行します。
 
@@ -34,6 +36,7 @@ python run.py
 
 ```json
 {
+  "api_base_url": "ここにマストドンのURLを入力します。例：https://mstdn.jp",
   "path_html5_comment_generator": "ここにHTML5コメントジェネレーターのディレクトリパスを指定します。",
   "execute_command": [
     "実行したいコマンドを書いておくと、トゥートが読み込まれるたびに実行します。",

@@ -1,8 +1,11 @@
 import datetime
+import os
 import subprocess
-from typing import NamedTuple
-from mastodon import Mastodon, StreamListener
 import xml.etree.ElementTree as ET
+from getpass import getpass
+from typing import NamedTuple
+
+from mastodon import Mastodon, StreamListener
 
 from config import generate_from_file
 from utility import strip_html_tags
@@ -34,9 +37,9 @@ class Runner(StreamListener):
         self.path_xml = self.config.path_xml_html5_comment_generator
 
         self.mastodon = Mastodon(
-            client_id='hiho_bot_app.secret',
-            access_token='hiho_karuta.secret',
-            api_base_url='https://friends.nico',
+            client_id='app.secret',
+            access_token='user.secret',
+            api_base_url=config.api_base_url,
         )
 
     def make_comment(self, toot):
@@ -87,11 +90,34 @@ class Runner(StreamListener):
         tree.write(self.path_xml, encoding='utf-8')
 
     def run(self):
+        print('running...')
         self.mastodon.local_stream(self)
 
 
 path_config = "./config.json"
 config = generate_from_file(path_config)
+
+assert config.api_base_url is None or len(config.api_base_url), "config.jsonのapi_base_urlを指定してください。"
+
+if not os.path.exists('./app.secret'):
+    Mastodon.create_app(
+        'nicolive-mastodon',
+        api_base_url=config.api_base_url,
+        to_file='app.secret',
+    )
+
+if not os.path.exists('./user.secret'):
+    username = input("ユーザー名（e-mailアドレス）を入力してください．．． ")
+    password = getpass("パスワードを入力してください．．． ")
+    mastodon = Mastodon(
+        client_id='app.secret',
+        api_base_url=config.api_base_url,
+    )
+    mastodon.log_in(
+        username,
+        password,
+        to_file='user.secret'
+    )
 
 runner = Runner(
     config=config,
