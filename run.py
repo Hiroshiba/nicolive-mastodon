@@ -68,7 +68,7 @@ class Runner(StreamListener):
             handle=comment.user,
         )
         element = ET.Element('comment', attrib=attr)
-        element.text = "<img src='{}'>".format(comment.icon_url) + comment.text
+        element.text = comment.text
         return element
 
     def on_update(self, toot):
