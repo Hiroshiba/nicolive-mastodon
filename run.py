@@ -66,6 +66,7 @@ class Runner(StreamListener):
             no=str(last_no + 1),
             time=str(comment.unix_time + 3),
             handle=comment.user,
+            icon_url=comment.icon_url,
         )
         element = ET.Element('comment', attrib=attr)
         element.text = comment.text
